@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Developer API Documentation & Playground - Comprehensive guide for integrating with our REST API">
+    <title>Developer API Documentation & Playground</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>API Docs</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#getting-started">Getting Started</a></li>
+                    <li><a href="#authentication">Authentication</a></li>
+                    <li><a href="#endpoints">Endpoints</a></li>
+                    <li><a href="#errors">Error Codes</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Welcome to Developer API Playground</h1>
+                <p class="hero-subtitle">Build powerful integrations with our RESTful API. Explore endpoints, test requests, and get started in minutes.</p>
+                <a href="#getting-started" class="cta-button">Get Started</a>
+            </div>
+        </section>
+
+        <section id="getting-started" class="section">
+            <div class="container">
+                <h2 class="section-title">Getting Started</h2>
+                <div class="content-block">
+                    <p class="intro-text">Our API provides a simple, RESTful interface for managing user data. All requests should be made to our base URL:</p>
+                    <div class="code-block">
+                        <code>https://api.example.com/v1</code>
+                    </div>
+                    <p class="intro-text">All API responses are returned in JSON format. Make sure to set the <code class="inline-code">Content-Type</code> header to <code class="inline-code">application/json</code> for POST and PUT requests.</p>
+                    <h3 class="subsection-title">Quick Start</h3>
+                    <ol class="step-list">
+                        <li>Obtain your API key from the dashboard</li>
+                        <li>Include the API key in the <code class="inline-code">X-API-Key</code> header</li>
+                        <li>Start making requests to our endpoints</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section id="authentication" class="section section-alt">
+            <div class="container">
+                <h2 class="section-title">Authentication</h2>
+                <div class="content-block">
+                    <p class="intro-text">All API requests require authentication using an API key. Your API key should be included in the request header.</p>
+                    <h3 class="subsection-title">API Key</h3>
+                    <p class="intro-text">To authenticate your requests, include your API key in the <code class="inline-code">X-API-Key</code> header:</p>
+                    <div class="code-block">
+                        <code>X-API-Key: your-api-key-here</code>
+                    </div>
+                    <p class="intro-text">You can generate and manage your API keys from your developer dashboard. Keep your API key secure and never share it publicly or commit it to version control.</p>
+                    <div class="warning-box">
+                        <strong>Security Note:</strong> API keys are sensitive credentials. Always use HTTPS when making requests and store keys securely.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="endpoints" class="section">
+            <div class="container">
+                <h2 class="section-title">API Endpoints</h2>
+                
+                <article class="endpoint-card">
+                    <div class="endpoint-header">
+                        <span class="method method-post">POST</span>
+                        <h3 class="endpoint-title">Create User</h3>
+                    </div>
+                    <div class="endpoint-path">
+                        <code>/users</code>
+                    </div>
+                    <p class="endpoint-description">Creates a new user in the system. Returns the created user object with a unique ID.</p>
+                    
+                    <h4 class="example-title">Request Example</h4>
+                    <div class="code-block">
+                        <pre><code>POST /v1/users
+Content-Type: application/json
+X-API-Key: your-api-key-here
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "role": "developer"
+}</code></pre>
+                    </div>
+
+                    <h4 class="example-title">Response Example</h4>
+                    <div class="code-block">
+                        <pre><code>HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "id": "usr_1234567890",
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "role": "developer",
+  "created_at": "2024-01-15T10:30:00Z",
+  "updated_at": "2024-01-15T10:30:00Z"
+}</code></pre>
+                    </div>
+                </article>
+
+                <article class="endpoint-card">
+                    <div class="endpoint-header">
+                        <span class="method method-get">GET</span>
+                        <h3 class="endpoint-title">Get User</h3>
+                    </div>
+                    <div class="endpoint-path">
+                        <code>/users/{id}</code>
+                    </div>
+                    <p class="endpoint-description">Retrieves a specific user by their unique identifier.</p>
+                    
+                    <h4 class="example-title">Request Example</h4>
+                    <div class="code-block">
+                        <pre><code>GET /v1/users/usr_1234567890
+X-API-Key: your-api-key-here</code></pre>
+                    </div>
+
+                    <h4 class="example-title">Response Example</h4>
+                    <div class="code-block">
+                        <pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": "usr_1234567890",
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "role": "developer",
+  "created_at": "2024-01-15T10:30:00Z",
+  "updated_at": "2024-01-15T10:30:00Z"
+}</code></pre>
+                    </div>
+                </article>
+
+                <article class="endpoint-card">
+                    <div class="endpoint-header">
+                        <span class="method method-put">PUT</span>
+                        <h3 class="endpoint-title">Update User</h3>
+                    </div>
+                    <div class="endpoint-path">
+                        <code>/users/{id}</code>
+                    </div>
+                    <p class="endpoint-description">Updates an existing user's information. All fields are optional; only provided fields will be updated.</p>
+                    
+                    <h4 class="example-title">Request Example</h4>
+                    <div class="code-block">
+                        <pre><code>PUT /v1/users/usr_1234567890
+Content-Type: application/json
+X-API-Key: your-api-key-here
+
+{
+  "name": "Jane Doe",
+  "role": "senior-developer"
+}</code></pre>
+                    </div>
+
+                    <h4 class="example-title">Response Example</h4>
+                    <div class="code-block">
+                        <pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": "usr_1234567890",
+  "name": "Jane Doe",
+  "email": "john.doe@example.com",
+  "role": "senior-developer",
+  "created_at": "2024-01-15T10:30:00Z",
+  "updated_at": "2024-01-15T14:45:00Z"
+}</code></pre>
+                    </div>
+                </article>
+
+                <article class="endpoint-card">
+                    <div class="endpoint-header">
+                        <span class="method method-delete">DELETE</span>
+                        <h3 class="endpoint-title">Delete User</h3>
+                    </div>
+                    <div class="endpoint-path">
+                        <code>/users/{id}</code>
+                    </div>
+                    <p class="endpoint-description">Permanently deletes a user from the system. This action cannot be undone.</p>
+                    
+                    <h4 class="example-title">Request Example</h4>
+                    <div class="code-block">
+                        <pre><code>DELETE /v1/users/usr_1234567890
+X-API-Key: your-api-key-here</code></pre>
+                    </div>
+
+                    <h4 class="example-title">Response Example</h4>
+                    <div class="code-block">
+                        <pre><code>HTTP/1.1 204 No Content</code></pre>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="errors" class="section section-alt">
+            <div class="container">
+                <h2 class="section-title">Error Codes</h2>
+                <div class="content-block">
+                    <p class="intro-text">The API uses standard HTTP status codes to indicate success or failure of requests. Below are the common error responses you may encounter:</p>
+                    
+                    <div class="error-table">
+                        <div class="error-row">
+                            <div class="error-code error-400">400</div>
+                            <div class="error-details">
+                                <h3 class="error-title">Bad Request</h3>
+                                <p class="error-description">The request was malformed or missing required parameters. Check your request body and ensure all required fields are present.</p>
+                                <div class="code-block code-block-small">
+                                    <pre><code>{
+  "error": {
+    "code": 400,
+    "message": "Invalid request parameters",
+    "details": "Email field is required"
+  }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="error-row">
+                            <div class="error-code error-404">404</div>
+                            <div class="error-details">
+                                <h3 class="error-title">Not Found</h3>
+                                <p class="error-description">The requested resource could not be found. Verify that the resource ID exists and you have the correct permissions.</p>
+                                <div class="code-block code-block-small">
+                                    <pre><code>{
+  "error": {
+    "code": 404,
+    "message": "Resource not found",
+    "details": "User with ID 'usr_1234567890' does not exist"
+  }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="error-row">
+                            <div class="error-code error-500">500</div>
+                            <div class="error-details">
+                                <h3 class="error-title">Internal Server Error</h3>
+                                <p class="error-description">An unexpected error occurred on the server. Please try again later or contact support if the issue persists.</p>
+                                <div class="code-block code-block-small">
+                                    <pre><code>{
+  "error": {
+    "code": 500,
+    "message": "Internal server error",
+    "details": "An unexpected error occurred. Please try again later."
+  }
+}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-text">Built for developers, by developers</p>
+            <a href="https://github.com" class="footer-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </div>
+    </footer>
+</body>
+</html>
